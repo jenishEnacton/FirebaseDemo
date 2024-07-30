@@ -1,4 +1,4 @@
-import {Clipboard, StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {clearAsyncData, getAsyncData} from '../../utils/asyncData';
 import CButton from '../common/CButton';
@@ -7,6 +7,7 @@ import CHeader from '../common/CHeader';
 import firestore from '@react-native-firebase/firestore';
 import {CLoader} from '../common/CLoader';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
+import Clipboard from '@react-native-clipboard/clipboard';
 import {sucessToast} from '../common/CToast';
 
 export default function Home({navigation}) {
@@ -24,18 +25,12 @@ export default function Home({navigation}) {
 
   const openLink = () => {
     Clipboard.setString(generalLink);
+    sucessToast('Copied!', 'Text copied to clipboard');
   };
 
   useEffect(() => {
     getLoginToken();
   }, []);
-
-  const onPressEmailSent = async () => {
-    await auth()
-      .sendPasswordResetEmail('vodite7756@orsbap.com')
-      .then(() => sucessToast('Sucess', 'Email sent Sucessfully'))
-      .catch(err => console.log(err));
-  };
 
   const getLoginToken = async () => {
     setIsLoading(true);
@@ -45,15 +40,33 @@ export default function Home({navigation}) {
     setIsLoading(false);
   };
 
-  const onPressLogOut = async () => {
-    await auth()
-      .signOut()
-      .then(
-        () => navigation.navigate('Login'),
-        await clearAsyncData('LOGINTOKEN'),
-      )
-      .catch(err => console.log(err));
+  const onPressLogOut = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            try {
+              await auth().signOut();
+              await clearAsyncData('LOGINTOKEN');
+              await clearAsyncData('PHONETOKEN');
+              navigation.navigate('Login');
+            } catch (err) {
+              console.log(err);
+            }
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
+  const onPressNext = () => navigation.navigate('ImagePick');
 
   return (
     <View style={styles.main}>
@@ -64,11 +77,6 @@ export default function Home({navigation}) {
         <Text style={styles.text}> {data?.phoneNum}</Text>
         <Text style={[styles.text, {marginHorizontal: 30}]}>{generalLink}</Text>
       </View>
-      <CButton
-        title={'Email Verification'}
-        extrasty={styles.mailverifyButton}
-        onPress={onPressEmailSent}
-      />
       <View style={styles.linkbtnview}>
         <CButton
           title={'Generate Link'}
@@ -81,6 +89,7 @@ export default function Home({navigation}) {
           onPress={openLink}
         />
       </View>
+      <CButton title={'Next'} onPress={onPressNext} extrasty={styles.btn} />
       <CButton
         title={'Log Out'}
         onPress={onPressLogOut}

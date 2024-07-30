@@ -28,6 +28,10 @@ export default function Login({navigation}) {
         console.log(error);
       });
   };
+  const onPressForgotPass = () => {
+    navigation.navigate('ForgotPassword');
+  };
+  const onPressLoginNumber = () => navigation.navigate('PhoneNumber');
 
   return (
     <View style={styles.main}>
@@ -59,7 +63,13 @@ export default function Login({navigation}) {
                 placeholder="Password"
                 secureTextEntry={true}
               />
-
+              <TouchableOpacity
+                style={styles.btnsty}
+                onPress={onPressForgotPass}>
+                <Text style={[styles.signuptext, {fontSize: 13}]}>
+                  {'Forgot Password'}
+                </Text>
+              </TouchableOpacity>
               <CButton
                 title={'Login'}
                 onPress={handleSubmit}
@@ -69,6 +79,10 @@ export default function Login({navigation}) {
 
               <TouchableOpacity onPress={onPressSignUp}>
                 <Text style={styles.signuptext}>{'Sign Up'}</Text>
+              </TouchableOpacity>
+              <Text style={{marginVertical: 5}}>or</Text>
+              <TouchableOpacity onPress={onPressLoginNumber}>
+                <Text style={styles.signuptext}>{'Using Number'}</Text>
               </TouchableOpacity>
             </>
           )}
@@ -97,5 +111,9 @@ const styles = StyleSheet.create({
     borderColor: '#BC9F8B',
     width: '60%',
     marginVertical: 10,
+  },
+  btnsty: {
+    alignSelf: 'flex-end',
+    marginRight: 25,
   },
 });

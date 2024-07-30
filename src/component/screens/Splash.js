@@ -12,7 +12,9 @@ export default function Splash({navigation}) {
 
   const getToken = async () => {
     const token = await getAsyncData('LOGINTOKEN');
-    if (token) {
+    const mobileToken = await getAsyncData('PHONETOKEN');
+
+    if (token || mobileToken) {
       navigation.replace('Home');
     } else {
       navigation.replace('Login');

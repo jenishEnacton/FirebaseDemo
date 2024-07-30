@@ -12,7 +12,8 @@ export const CLoader = () => {
 
 const localStyle = StyleSheet.create({
   main: {
-    backgroundColor: 'transparent',
+    flex: 1,
+    backgroundColor: '#fff',
     position: 'absolute',
     height: '100%',
     width: '100%',

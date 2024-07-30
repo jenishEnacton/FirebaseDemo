@@ -17,6 +17,7 @@ export default function CustomeInput(props) {
           props.multiline && {height: props.numberOfLines * 40},
           hasError && styles.errorInput,
         ]}
+        placeholderTextColor={'#000'}
         value={value}
         onChangeText={text => onChange(name)(text)}
         onBlur={() => {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     width: '90%',
     fontSize: 20,
+    color: '#000',
   },
   errorText: {
     fontSize: 10,

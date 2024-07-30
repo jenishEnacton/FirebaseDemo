@@ -45,3 +45,27 @@ export const loginValidationSchema = yup.object().shape({
     .min(8, ({min}) => `Password must be at least ${min} characters`)
     .required('Password is required'),
 });
+
+export const forgotPasswordSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter valid email')
+    .required('Email Address is Required'),
+});
+
+export const mobileNumberSchema = yup.object().shape({
+  phoneNumber: yup
+    .string()
+    .matches(
+      /^(?:(?:\+{0,1}91)|0|91)?[6-9][0-9]{9}$/,
+      'Enter a valid phone number',
+    )
+    .required('Phone number is required'),
+});
+
+export const otpSchema = yup.object().shape({
+  Otp: yup
+    .string()
+    .matches(/^\d{6}$/, 'Enter a valid 6-digit OTP')
+    .required('OTP is required'),
+});
