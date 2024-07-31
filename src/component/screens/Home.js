@@ -134,11 +134,6 @@ const styles = StyleSheet.create({
   },
   linkbtn: {
     width: '40%',
-  },
-  mailverifyButton: {
-    width: '50%',
-    alignSelf: 'center',
-    borderRadius: 25,
-    backgroundColor: '#6482AD',
+    backgroundColor: '#914F1E',
   },
 });
