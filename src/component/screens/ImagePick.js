@@ -6,7 +6,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import {errorToast, sucessToast} from '../common/CToast';
 
-export default function ImagePick() {
+export default function ImagePick({navigation}) {
   const [imageUri, setImageUri] = useState(null);
 
   const selectImage = () => {
@@ -38,6 +38,7 @@ export default function ImagePick() {
       errorToast('Error!', 'Please select an image');
     }
   };
+  const onPressNext = () => navigation.navigate('PdfGenrate');
 
   return (
     <View style={styles.main}>
@@ -58,6 +59,7 @@ export default function ImagePick() {
         )}
         <CButton title={'Choose Date'} />
       </View>
+      <CButton title={'Next'} extrasty={styles.nextbtn} onPress={onPressNext} />
     </View>
   );
 }
@@ -81,5 +83,11 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: 'contain',
     marginVertical: 10,
+  },
+  nextbtn: {
+    width: '60%',
+    alignSelf: 'center',
+    borderRadius: 30,
+    backgroundColor: '#1A3636',
   },
 });

@@ -10,6 +10,7 @@ import {LogLevel, OneSignal} from 'react-native-onesignal';
 import ForgotPassword from '../component/auth/ForgotPassword';
 import PhoneNumber from '../component/auth/PhoneNumber';
 import ImagePick from '../component/screens/ImagePick';
+import PdfGenrate from '../component/screens/PdfGenrate';
 
 export default function StackNavigation() {
   const Stack = createNativeStackNavigator();
@@ -41,6 +42,7 @@ export default function StackNavigation() {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
         <Stack.Screen name="ImagePick" component={ImagePick} />
+        <Stack.Screen name="PdfGenrate" component={PdfGenrate} />
       </Stack.Navigator>
       <Toast config={toastConfig} />
     </NavigationContainer>

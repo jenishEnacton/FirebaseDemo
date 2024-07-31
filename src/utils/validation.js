@@ -69,3 +69,31 @@ export const otpSchema = yup.object().shape({
     .matches(/^\d{6}$/, 'Enter a valid 6-digit OTP')
     .required('OTP is required'),
 });
+
+export const productPurchaseValidationSchema = yup.object().shape({
+  fullName: yup
+    .string()
+    .matches(/(\w.+\s).+/, 'Enter at least 2 names')
+    .required('Full name is required'),
+  email: yup
+    .string()
+    .email('Please enter a valid email')
+    .required('Email is required'),
+  phoneNumber: yup
+    .string()
+    .matches(
+      /^(?:(?:\+{0,1}91)|0|91)?[6-9][0-9]{9}$/,
+      'Enter a valid phone number',
+    )
+    .required('Phone number is required'),
+  productName: yup.string().required('Product Name is required'),
+  quantity: yup
+    .number()
+    .positive('Quantity must be a positive number')
+    .integer('Quantity must be an integer')
+    .required('Quantity is required'),
+  rate: yup
+    .number()
+    .positive('Rate must be a positive number')
+    .required('Rate is required'),
+});
