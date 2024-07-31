@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 35,
     marginBottom: 20,
+    backgroundColor: '#522258',
   },
   linkbtnview: {
     width: '100%',
