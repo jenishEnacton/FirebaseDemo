@@ -72,7 +72,9 @@ export default function Home({navigation}) {
     <View style={styles.main}>
       <CHeader title={'Home'} />
       <View style={styles.innerview}>
-        <Text style={styles.text}>Welcome, {data?.name}</Text>
+        <Text style={[styles.text, {fontWeight: 'bold'}]}>
+          Welcome, {data?.name}
+        </Text>
         <Text style={styles.text}> {data?.email}</Text>
         <Text style={styles.text}> {data?.phoneNum}</Text>
         <Text style={[styles.text, {marginHorizontal: 30}]}>{generalLink}</Text>
